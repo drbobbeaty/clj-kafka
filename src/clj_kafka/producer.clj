@@ -17,13 +17,19 @@
   [#^bytes payload]
   (Message. payload))
 
-(defn send-messages
+(defn send-message
   "Sends a message.
    topic   : a string
    msgs    : a single message, or sequence of messages to send"
   [^Producer producer ^String topic msgs]
   (.send producer (ProducerData. topic msgs)))
 
+(defn send-messages
+  "Sends a sequence of messages.
+   topic   : a string
+   msgs    : a single message, or sequence of messages to send"
+  [^Producer producer ^String topic ^java.util.List msgs]
+  (.send producer (ProducerData. topic msgs)))
 
 (defprotocol ToMessage
   "Protocol to be extended to convert types to encoded Message objects"
